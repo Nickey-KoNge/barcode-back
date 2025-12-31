@@ -10,16 +10,17 @@ import { BarcodesController } from './barcodes/barcodes.controller';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-       type: 'mysql',
-  url: process.env.DATABASE_URL,
-  autoLoadEntities: true,
-  
-  ssl: process.env.NODE_ENV === 'production'
-    ? { rejectUnauthorized: false }
-    : false,
+      type: 'mysql',
+      url: process.env.DATABASE_URL,
+      autoLoadEntities: true,
+
+      ssl:
+        process.env.NODE_ENV === 'production'
+          ? { rejectUnauthorized: false }
+          : false,
       entities: [Barcode, InventoryTransaction],
       // Production မှာဆိုရင် synchronize: false ထားတာ ပိုစိတ်ချရပါတယ်
-      synchronize: false, 
+      synchronize: false,
     }),
 
     TypeOrmModule.forFeature([Barcode, InventoryTransaction]),
