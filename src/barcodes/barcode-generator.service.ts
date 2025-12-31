@@ -1,4 +1,3 @@
-
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DataSource, Repository } from 'typeorm';
@@ -41,8 +40,8 @@ export class BarcodeGeneratorService {
   //   await this.barcodeRepo.save(newBarcode);
 
   //   await this.dataSource.query(
-  //     `INSERT INTO stock_balances (product_id, quantity_on_hand) 
-  //      VALUES (?, 0) 
+  //     `INSERT INTO stock_balances (product_id, quantity_on_hand)
+  //      VALUES (?, 0)
   //      ON DUPLICATE KEY UPDATE product_id = product_id`,
   //     [itemData.unit_id],
   //   );
@@ -51,7 +50,7 @@ export class BarcodeGeneratorService {
 
   //   return { ...newBarcode, barcodeImage };
   // }
-    async registerProductAndGenerateBarcode(itemData: {
+  async registerProductAndGenerateBarcode(itemData: {
     unit_id: string;
     item_type: string;
   }) {
