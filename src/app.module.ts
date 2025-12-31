@@ -9,19 +9,19 @@ import { BarcodesController } from './barcodes/barcodes.controller';
 
 @Module({
   imports: [
-    // ၁။ Database ကိုအရင်ချိတ်ရပါမယ် (forRoot ကို သုံးပါ)
     TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root', // သင့် MySQL username
-      password: '', // သင့် MySQL password
-      database: 'barcodedb',
+       type: 'mysql',
+  url: process.env.DATABASE_URL,
+  autoLoadEntities: true,
+  
+  ssl: process.env.NODE_ENV === 'production'
+    ? { rejectUnauthorized: false }
+    : false,
       entities: [Barcode, InventoryTransaction],
-      synchronize: true, // Table တွေကို Auto ဆောက်ပေးဖို့ (Dev mode မှာပဲ သုံးပါ)
+      // Production မှာဆိုရင် synchronize: false ထားတာ ပိုစိတ်ချရပါတယ်
+      synchronize: false, 
     }),
 
-    // ၂။ Entity တွေကို ဒီ Module မှာ သုံးမယ်လို့ ကြေညာပါ (forFeature ကို သုံးပါ)
     TypeOrmModule.forFeature([Barcode, InventoryTransaction]),
   ],
   controllers: [InventoryController, BarcodesController],
